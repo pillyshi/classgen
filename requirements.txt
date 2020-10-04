@@ -1,0 +1,8 @@
+-i https://pypi.org/simple
+importlib-metadata==1.7.0
+mypy-extensions==0.4.3
+pyyaml==5.3.1
+typed-argument-parser==1.5.4
+typing-extensions==3.7.4.3
+typing-inspect==0.6.0
+zipp==3.2.0; python_version >= '3.6'

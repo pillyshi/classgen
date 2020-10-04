@@ -1,3 +1,4 @@
+import sys
 import json
 from tap import Tap
 
@@ -12,7 +13,10 @@ class Option(Tap):
     out_file: str
 
 
-def main(option: Option):
+def main() -> None:
+    args = sys.argv[1:]
+    option = Option().parse_args(args)
+
     if option.in_file.endswith('.yaml') or option.in_file.endswith('.yml'):
         with open(option.in_file) as f:
             obj = yaml.safe_load(f)
@@ -24,8 +28,3 @@ def main(option: Option):
     class_string = get_class_string_from_dict(option.top_class_name, obj)
     with open(option.out_file, 'w') as f:
         print(class_string, end='', file=f)
-
-
-if __name__ == "__main__":
-    option = Option().parse_args()
-    main(option)

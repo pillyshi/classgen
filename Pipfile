@@ -13,6 +13,7 @@ ipython = "*"
 typed-argument-parser = "~=1.5.4"
 pyyaml = "~=5.3.1"
 importlib-metadata = "~=1.7.0"
+zipp = {editable = true, path = "."}
 
 [requires]
 python_version = "3.6"
