@@ -5,13 +5,12 @@ from classgen.loaders import load_yaml
 
 
 def test_load_yaml():
-    top_class_name = 'Info'
     classes = [Employee, Company, Info]
     with open('data/test/info.yml') as f:
         _info = yaml.safe_load(f)
     with open('data/test/info.yml') as f:
-        info = load_yaml(f, top_class_name, classes)
-    assert info.__class__.__name__ == top_class_name
+        info = load_yaml(f, Info, classes)
+    assert info.__class__ == Info
     assert hasattr(info, 'company')
     assert info.company.__class__.__name__ == 'Company'
     assert info.company.id == _info['company']['id']
@@ -23,13 +22,12 @@ def test_load_yaml():
 
 
 def test_load_json():
-    top_class_name = 'Info'
     classes = [Employee, Company, Info]
     with open('data/test/info.json') as f:
         _info = yaml.safe_load(f)
     with open('data/test/info.json') as f:
-        info = load_yaml(f, top_class_name, classes)
-    assert info.__class__.__name__ == top_class_name
+        info = load_yaml(f, Info, classes)
+    assert info.__class__ == Info
     assert hasattr(info, 'company')
     assert info.company.__class__.__name__ == 'Company'
     assert info.company.id == _info['company']['id']
