@@ -6,13 +6,13 @@ import yaml
 from .utils import convert_to_camel_case
 
 
-def load(top_class_name: str, obj: Any, class_dict: Dict[str, Any]) -> Any:
-    def parse(class_name, *args, **kwargs):
+def load(top_class_name: str, obj: Any, class_dict: Dict[str, Any]) -> object:
+    def parse(class_name, *args, **kwargs) -> object:
         if args:
             if isinstance(args[0], dict):
                 return [parse(class_name[:-1], **value) for value in args]
             return list(args)
-        if kwargs:
+        elif kwargs:
             class_name = convert_to_camel_case(class_name, True)
             values = []
             for key, value in kwargs.items():
@@ -23,6 +23,8 @@ def load(top_class_name: str, obj: Any, class_dict: Dict[str, Any]) -> Any:
                 else:
                     values.append(value)
             return class_dict[class_name](*values)
+        else:
+            raise ValueError()
     return parse(top_class_name, **obj)
 
 
