@@ -1,3 +1,4 @@
+import json
 from typing import IO, Any, Dict, List
 
 import yaml
@@ -27,5 +28,11 @@ def load(top_class_name: str, obj: Any, class_dict: Dict[str, Any]) -> Any:
 
 def load_yaml(file: IO, top_class_name: str, classes: List[Any]) -> Any:
     obj = yaml.safe_load(file)
+    class_dict = {class_.__name__: class_ for class_ in classes}
+    return load(top_class_name, obj, class_dict)
+
+
+def load_json(file: IO, top_class_name: str, classes: List[Any]) -> Any:
+    obj = json.load(file)
     class_dict = {class_.__name__: class_ for class_ in classes}
     return load(top_class_name, obj, class_dict)

@@ -1,0 +1,16 @@
+{
+    "company": {
+        "id": 1,
+        "name": "example corporation",
+        "employees": [
+            {
+                "id": 1,
+                "name": "tanaka"
+            },
+            {
+                "id": 2,
+                "name": "yamada"
+            }
+        ]
+    }
+}
