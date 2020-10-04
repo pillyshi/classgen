@@ -1,5 +1,5 @@
 import re
-from typing import List, Tuple, Set
+from typing import List, Tuple, Set, Any, IO
 from collections import namedtuple
 
 
@@ -73,3 +73,23 @@ def get_class_strings_from_dict(class_name, obj) -> List[str]:
         class_strings.append(class_string)
         already_added.add(class_string)
     return class_strings
+
+
+def get_class_string_from_dict(top_class_name: str, obj: Any) -> str:
+    class_string = ''
+    class_strings = get_class_strings_from_dict(top_class_name, obj)
+
+    typing_modules = ['NamedTuple']
+    if any('List' in class_string for class_string in class_strings):
+        typing_modules.append('List')
+
+    class_string += f'from typing import {", ".join(typing_modules)}\n'
+    class_string += '\n\n'
+    class_string += '\n\n\n'.join(class_strings)
+    class_string += '\n\n'
+    print(class_string)
+    return class_string
+
+
+def write_classes_from_dict(top_class_name: str, obj: Any, file: IO):
+    pass
