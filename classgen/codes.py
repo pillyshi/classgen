@@ -87,5 +87,4 @@ def get_class_string_from_dict(top_class_name: str, obj: Any) -> str:
     class_string += '\n\n'
     class_string += '\n\n\n'.join(class_strings)
     class_string += '\n\n'
-    print(class_string)
     return class_string
