@@ -14,4 +14,3 @@ class Company(NamedTuple):
 
 class Info(NamedTuple):
     company: Company
-

@@ -145,5 +145,5 @@ class Company(NamedTuple):
 
 class Info(NamedTuple):
     company: Company
-    """.strip() + '\n\n'
+    """.strip() + '\n'
     assert _class_string == class_string
