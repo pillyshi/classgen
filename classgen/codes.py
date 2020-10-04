@@ -1,6 +1,7 @@
-import re
-from typing import List, Tuple, Set, Any, IO
+from typing import List, Tuple, Set, Any
 from collections import namedtuple
+
+from .utils import convert_to_camel_case
 
 
 variable_template = '    {}: {}'
@@ -10,16 +11,6 @@ class_template = """
 class {}(NamedTuple):
 {}
 """
-
-
-def convert_to_camel_case(string, titleCase=False) -> str:
-    """
-    https://oboe2uran.hatenablog.com/entry/2019/10/01/083415
-    """
-    if titleCase:
-        return ''.join(x.title() for x in string.split('_'))
-    else:
-        return re.sub("_(.)", lambda m: m.group(1).upper(), string.lower())
 
 
 def get_type_string(obj) -> str:
