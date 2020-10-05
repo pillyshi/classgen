@@ -19,6 +19,9 @@ def test_load_yaml():
         assert employee.__class__.__name__ == 'Employee'
         assert employee.id == _info['company']['employees'][i]['id']
         assert employee.name == _info['company']['employees'][i]['name']
+    for i, email in enumerate(info.company.emails):
+        assert isinstance(email, str)
+        assert email == _info['company']['emails'][i]
 
 
 def test_load_json():

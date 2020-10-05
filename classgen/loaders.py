@@ -13,7 +13,7 @@ def load(top_class: Type[T], obj: Any, class_dict: Dict[str, Any]) -> T:
     def parse(class_: Type[Any], *args, **kwargs) -> Any:
         if args:
             if isinstance(args[0], dict):
-                return [parse(class_, **value) for value in args]
+                return [class_(**value) for value in args]
             return list(args)
         elif kwargs:
             values = []
@@ -22,7 +22,10 @@ def load(top_class: Type[T], obj: Any, class_dict: Dict[str, Any]) -> T:
                 if isinstance(value, dict):
                     values.append(parse(class_dict[key_camel], **value))
                 elif isinstance(value, list):
-                    values.append(parse(class_dict[key_camel[:-1]], *value))
+                    if isinstance(value[0], dict):
+                        values.append(parse(class_dict[key_camel[:-1]], *value))
+                    else:
+                        values.append(value)
                 else:
                     values.append(value)
             return class_(*values)

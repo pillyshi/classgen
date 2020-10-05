@@ -10,6 +10,7 @@ class Company(NamedTuple):
     id: int
     name: str
     employees: List[Employee]
+    emails: List[str]
 
 
 class Info(NamedTuple):
