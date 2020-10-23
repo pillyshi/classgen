@@ -54,7 +54,12 @@ def get_class_strings_from_dict(class_name, obj) -> List[str]:
             class_names += [convert_to_camel_case(class_name, True)]
             variables_list += [list(zip(kwargs.keys(), map(get_type_string, values)))]
             return T(*values)
-    parse(class_name, **obj)
+    if isinstance(obj, list):
+        parse(class_name, *obj)
+    elif isinstance(obj, dict):
+        parse(class_name, **obj)
+    else:
+        raise ValueError()
     class_strings: List[str] = []
     already_added: Set[str] = set()
     for class_name, variables in zip(class_names, variables_list):

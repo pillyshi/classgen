@@ -31,7 +31,12 @@ def load(top_class: Type[T], obj: Any, class_dict: Dict[str, Any]) -> T:
             return class_(*values)
         else:
             raise ValueError()
-    return parse(top_class, **obj)
+    if isinstance(obj, list):
+        return parse(top_class, *obj)
+    elif isinstance(obj, dict):
+        return parse(top_class, **obj)
+    else:
+        raise ValueError()
 
 
 def load_yaml(file: IO, top_class: Type[T], classes: List[Any]) -> T:
